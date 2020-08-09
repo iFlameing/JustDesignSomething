@@ -1,33 +1,43 @@
 import React from "react";
-import Paper from "@material-ui/core/Paper";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme) => ({
+  card: {
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    borderRadius: theme.spacing(2),
+    width: "100%",
+  },
   paper: {
     display: "flex",
-    marginTop: 10,
-    margin: "auto",
     padding: theme.spacing(2),
+    paddingBottom: 0,
+    paddingTop: 0,
     width: "100%",
     background: "#FOF4F8",
     fontWeight: 500,
     fontFamily: "Montserrat",
     fontSize: 18,
     color: "#102A43",
-    linHeight: 1.5,
+    lineHeight: 1.5,
+    marginBottom: 0,
   },
   leftdiv: {
     display: "flex",
     position: "relative",
-    width: "10%",
+    width: "3%",
   },
   line: {
     background: "#Bcccdc",
     position: "absolute",
-    height: "100%",
+    height: "170%",
     width: "5px",
-    marginTop: 0,
+    marginTop: -45,
+    marginBottom: -120,
   },
   circle: {
     position: "absolute",
@@ -39,61 +49,73 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "50%",
   },
   rightdiv: {
-    marginLeft: 10,
+    marginLeft: theme.spacing(1),
     [theme.breakpoints.down("sm")]: {
-      marginRight: 0,
-      paddingLeft: 10,
+      marginRight: theme.spacing(1),
+      marginLeft: theme.spacing(2),
     },
-    marginRight: 20,
-    position: "relative",
+    paddingRight: theme.spacing(2),
+    paddingBottom: 0,
+    width: "95%",
+    wordWrap: "break-word",
+    textAlign: "justify",
   },
   image: {
     display: "flex",
-    flexFlow: "column-reverse",
-    position: "relative",
-  },
-  avatar: {
-    position: "abasolute",
-    bottom: -10,
-  },
-  date: {
-    position: "absolute",
-    bottom: -25,
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "baseline",
+    marginLeft: 50,
+    [theme.breakpoints.down("sm")]: {
+      marginLeft: 49,
+    },
   },
   last: {
     marginBottom: 80,
   },
   paragraph: {
-    marginBottom: 25,
+    marginBottom: theme.spacing(0),
+    hyphens: "auto",
+    marginTop: theme.spacing(0),
+  },
+  avatar: {
+    position: "relative",
+    left: -theme.spacing(1),
+  },
+  cardContent: {
+    marginBottom: 0,
+    paddingBottom: 0,
+  },
+  date: {
+    color: "#486581",
   },
 }));
 
-export default function Card(props) {
+export default function ElogCard(props) {
   const classes = useStyles();
-  let lastItem = classes.paper;
+  let lastItem = classes.card;
   if (props.last) {
     lastItem = lastItem + " " + classes.last;
   }
   return (
-    <Paper className={lastItem}>
-      <div className={classes.leftdiv}>
-        <div className={classes.line}></div>
-        <div className={classes.circle}></div>
-      </div>
-      <div className={classes.rightdiv}>
-        <p className={classes.paragraph}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in
-        </p>
-        <p className={classes.date}>11:47pm. May 11,2020</p>
-      </div>
-      <div className={classes.image}>
-        <Avatar className={classes.avatar} alt="Remy Sharp" />
-      </div>
-    </Paper>
+    <Card className={props.last ? lastItem : classes.card}>
+      <CardContent className={classes.cardContent}>
+        <div className={classes.paper}>
+          <div className={classes.leftdiv}>
+            <div className={classes.line}></div>
+            <div className={classes.circle}></div>
+          </div>
+          <div className={classes.rightdiv}>
+            <p className={classes.paragraph}>{props.text.data}</p>
+          </div>
+        </div>
+      </CardContent>
+      <CardActions>
+        <div className={classes.image}>
+          <p className={classes.date}>11:47pm. May 11,2020</p>
+          <Avatar className={classes.avatar} alt="Remy Sharp" />
+        </div>
+      </CardActions>
+    </Card>
   );
 }
