@@ -34,10 +34,9 @@ const useStyles = makeStyles((theme) => ({
   line: {
     background: "#Bcccdc",
     position: "absolute",
-    height: "170%",
+    height: "500%",
     width: "5px",
-    marginTop: -45,
-    marginBottom: -120,
+    marginTop: -20,
   },
   circle: {
     position: "absolute",
